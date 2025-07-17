@@ -35,6 +35,7 @@ io.on("connection", socket => {
       });
 
       callback();
+      console.log("Hello!");
     }
   });
 
@@ -48,6 +49,7 @@ io.on("connection", socket => {
       io.to(user.room).emit("message", generateMessage(user.username, message));
       callback();
     }
+    console.log("Successfully send a message");
   });
 
   socket.on("sendLocation", (coords, callback) => {
@@ -57,6 +59,7 @@ io.on("connection", socket => {
     const user = getUser(socket.id);
     io.to(user.room).emit("locationMessage", generateLocationMessage(user.username, `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`));
     callback();
+    console.log("Successfully send a location");
   });
 
   socket.on("disconnect", () => {
@@ -69,6 +72,7 @@ io.on("connection", socket => {
         users: getUsersInRoom(user.room)
       });
     }
+    console.log("Successfully disconnect");
   });
 });
 
