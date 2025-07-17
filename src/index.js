@@ -45,6 +45,8 @@ io.on("connection", socket => {
 
     if (filter.isProfane(message)) {
       return callback("Profanity is not allowed!");
+    } else if (filter.includesUs(message)) {
+      return callback("The string contains 'us'")
     } else {
       io.to(user.room).emit("message", generateMessage(user.username, message));
       callback();
