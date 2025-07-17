@@ -33,9 +33,8 @@ io.on("connection", socket => {
         room: user.room,
         users: getUsersInRoom(user.room)
       });
-
-      callback();
       console.log("Hello!");
+      callback();
     }
   });
 
@@ -55,13 +54,14 @@ io.on("connection", socket => {
   });
 
   socket.on("sendLocation", (coords, callback) => {
+    console.log(coords)
     if ( 4 < coords.latitude && coords.latitude < 53 && 73 < coords.longitude && coords.longitude < 135) {
       console.log("Here is China!!!")
     }
     const user = getUser(socket.id);
     io.to(user.room).emit("locationMessage", generateLocationMessage(user.username, `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`));
-    callback();
     console.log("Successfully send a location");
+    callback();
   });
 
   socket.on("disconnect", () => {
