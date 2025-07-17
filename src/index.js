@@ -55,7 +55,7 @@ io.on("connection", socket => {
 
   socket.on("sendLocation", (coords, callback) => {
     console.log(coords)
-    if ( 4 < coords.latitude && coords.latitude < 53 && 73 < coords.longitude && coords.longitude < 135) {
+    if ( 0 < coords.latitude && coords.latitude < 53 && 73 < coords.longitude && coords.longitude < 135) {
       console.log("Here is China!!!")
     }
     const user = getUser(socket.id);
